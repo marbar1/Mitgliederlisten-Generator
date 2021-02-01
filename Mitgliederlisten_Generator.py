@@ -69,7 +69,7 @@ def generate():
     print('Generating...')
     try:
         inputData = pd.read_clipboard(sep=';')
-        outputFileName = filedialog.asksaveasfilename(filetypes=[("Excel Datei", ".xlsx")])
+        outputFileName = filedialog.asksaveasfilename(filetypes=[("Excel Datei", ".xlsx")], defaultextension='.xlsx')
         with pd.ExcelWriter(outputFileName) as report: # pylint: disable=abstract-class-instantiated
             parseData(inputData, report)
         
