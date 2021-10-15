@@ -28,7 +28,7 @@ def parseData(data, writer):
     # Fill NaN with values from the previous rows
     data[['Vorname', 'Name', 'lfd. Nr.']] = data[['Vorname', 'Name', 'lfd. Nr.']].fillna(method='pad')
 
-    # Delete row if the persion is not active in that division anymore.
+    # Delete row if the person is not active in that division anymore.
     data = data[data['Bis'].isnull()]
 
     # Create summary Table
