@@ -7,12 +7,13 @@ inputFile = 'data.csv'
 reportFile = 'report.xlsx'
 
 divisions = [
-    'musikalische Früherziehung',
+    'musikalische Früherziehung', # Deprecated
     'Stammorchester',
     'Jugendkapelle',
     'Bläserklasse',
-    'Seniorenkapelle',
-    'Vororchester']
+    'Seniorenkapelle', # Deprecated
+    'Vororchester',
+    'Einzelunterricht']
 
 columnWidths = {
     'index':     3.5,
@@ -60,6 +61,10 @@ def getSummary(data):
     ]
 
     for division in divisions:
+        nMembers = data.loc[data['Bereich'] == division, 'lfd. Nr.'].nunique()
+        # Check if the division has zero members (is depricated) and omit it in the summary.
+        if nMembers == 0:
+            continue
         summary.append((f'davon in {division}', data.loc[data['Bereich'] == division, 'lfd. Nr.'].nunique()))
 
     return pd.DataFrame.from_records(summary)
@@ -72,7 +77,7 @@ def generate():
         outputFileName = filedialog.asksaveasfilename(filetypes=[("Excel Datei", ".xlsx")], defaultextension='.xlsx')
         with pd.ExcelWriter(outputFileName) as report: # pylint: disable=abstract-class-instantiated
             parseData(inputData, report)
-        
+
         print('Done')
         window.destroy()
     except Exception as e:
