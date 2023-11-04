@@ -9,5 +9,5 @@ conda env create -f environment.yml
 ```
 
 ## Ausführen
-Die Python-Umgebung wird mit `conda activate reportGenerate` aktiviert.
+Die Python-Umgebung wird mit `conda activate reportGenerator` aktiviert.
 Danach kann das Skript [Mitgliederlisten_Generator.py](Mitgliederlisten_Generator.py) ausgeführt werden.
